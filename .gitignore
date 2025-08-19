@@ -1,0 +1,32 @@
+# Virtual env
+venv/
+.venv/
+ENV/
+env/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.log
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Outputs & large files
+models/
+reports/
+runs/
+outputs/
+
+# Hugging Face caches (project-local)
+.cache/
+datasets/
+
+# IDE
+.vscode/
+.idea/
