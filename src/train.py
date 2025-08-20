@@ -17,7 +17,7 @@ from sklearn.metrics import accuracy_score, f1_score
 
 from utils import set_seed, device_str, get_label_names_from_dataset
 
-# Optional: PEFT/LoRA
+
 try:
     from peft import LoraConfig, get_peft_model, TaskType
     PEFT_AVAILABLE = True
@@ -114,7 +114,7 @@ def main():
     fp16 = torch.cuda.is_available()
     training_args = TrainingArguments(
         output_dir=args.output_dir,
-        eval_strategy="epoch",  # ✅ FIXED: Changed from evaluation_strategy
+        eval_strategy="epoch",  
         save_strategy="epoch",
         learning_rate=args.lr,
         per_device_train_batch_size=args.batch_size,
@@ -152,7 +152,7 @@ def main():
     test_metrics = trainer.evaluate(eval_dataset=encoded_test)
     print(test_metrics)
 
-    # Save metrics
+    
     import json
     os.makedirs("reports", exist_ok=True)
     with open(os.path.join("reports", "val_metrics.json"), "w") as f:
@@ -160,7 +160,7 @@ def main():
     with open(os.path.join("reports", "test_metrics.json"), "w") as f:
         json.dump({k: float(v) for k, v in test_metrics.items()}, f, indent=2)
 
-    # Final save (model + tokenizer + labels)
+    
     trainer.save_model(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
 
